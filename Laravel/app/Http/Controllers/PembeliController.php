@@ -33,4 +33,8 @@ class PembeliController extends Controller
         //redirect to pembeli
         return redirect('/pembeli');
     }
+
+    public function login(){
+        return view('loginpembeli');
+    }
 }
