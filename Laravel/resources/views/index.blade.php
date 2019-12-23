@@ -12,11 +12,12 @@
     <br>
     <table border="1">
         <tr>
-            <th>Username</th>
-            <th>Password</th>
+            <th>Nim</th>
             <th>Nama</th>
-            <th>NIM</th>
-            <th>Jurusan</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Action</th>
         </tr>
         @foreach ($pembeli as $pem)
         <tr>
