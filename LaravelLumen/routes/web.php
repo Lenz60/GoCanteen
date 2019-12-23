@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,6 +13,8 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$app->get('/', function () use ($app) {
+    return $app->version();
 });
+$app->post('createuser', 'UserController@create');
+$app->post('userlogin', 'UserController@login');

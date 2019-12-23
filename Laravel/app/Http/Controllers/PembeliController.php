@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\DB;
 class PembeliController extends Controller
 {
     public function index(){
+        
 
         //get all data from table pembeli
-        $pembeli = DB::table('pembeli')->get();
+        $pembeli = DB::table('users')->get();
 
         //return the data pembeli to view index
         return view('index', ['pembeli' => $pembeli]);
@@ -23,7 +24,7 @@ class PembeliController extends Controller
 
     public function store(Request $request){
         //insert data to table pembeli
-        DB::table('pembeli')->insert([
+        DB::table('users')->insert([
             'NIM' => $request->NIMField,
             'nama' => $request->namaField,
             'email' => $request->emailField,
@@ -37,4 +38,5 @@ class PembeliController extends Controller
     public function login(){
         return view('loginpembeli');
     }
+
 }

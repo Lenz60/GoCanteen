@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/pembeli/login','PembeliController@login');
+Route::get('/pembeli/register','ApiController@index');
 Route::get('/pembeli','PembeliController@index');
 Route::get('/pembeli/adduser','PembeliController@add');
 Route::post('/pembeli/storedata','PembeliController@store');
