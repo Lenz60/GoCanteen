@@ -20,11 +20,11 @@
         </tr>
         @foreach ($pembeli as $pem)
         <tr>
-            <td>{{ $pem->username }}</td>
-            <td>{{ $pem->password }}</td>
+            <td>{{ $pem->NIM }}</td>
             <td>{{ $pem->nama }}</td>
-            <td>{{ $pem->nim }}</td>
-            <td>{{ $pem->jurusan }}</td>
+            <td>{{ $pem->gender }}</td>
+            <td>{{ $pem->email }}</td>
+            <td>{{ $pem->password }}</td>
             <td>
                 <a href="/pembeli/edit/edit/{{ $pem->id }}">Edit</a>
                 <a href="/pegawai/delete/{{ $pem->id }}">Delete</a>

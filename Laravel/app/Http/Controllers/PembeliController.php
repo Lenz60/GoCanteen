@@ -24,11 +24,11 @@ class PembeliController extends Controller
     public function store(Request $request){
         //insert data to table pembeli
         DB::table('pembeli')->insert([
-            'username' => $request->usernameField,
-            'password' => $request->passwordField,
+            'NIM' => $request->NIMField,
             'nama' => $request->namaField,
-            'nim' => $request->nimField,
-            'jurusan' => $request->jurusanField,
+            'email' => $request->emailField,
+            'password' => $request->passwordField,
+            'gender' => $request->gender,
         ]);
         //redirect to pembeli
         return redirect('/pembeli');

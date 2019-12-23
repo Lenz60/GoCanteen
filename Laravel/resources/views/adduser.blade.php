@@ -9,20 +9,23 @@
 <body>
     <form action="/pembeli/storedata" method="POST">
         {{ csrf_field() }}
-        <label for="username">Username</label>
-        <input type="text" name="usernameField" id="idusernameField">
-        <br>
-        <label for="password">Password</label>
-        <input type="password" name="passwordField" id="idpasswordField">
+        <label for="NIM">NIM</label>
+        <input type="text" name="NIMField" id="idnimField">
         <br>
         <label for="nama">Nama</label>
         <input type="text" name="namaField" id="idnamaField">
         <br>
-        <label for="NIM">NIM</label>
-        <input type="text" name="nimField" id="idnimField">
+        <label for="email">Email</label>
+        <input type="email" name="emailField" id="idemailField">
         <br>
-        <label for="jurusan">Jurusan</label>
-        <input type="text" name="jurusanField" placeholder="17IF04" id="idjurusanField">
+        <label for="password">Password</label>
+        <input type="password" name="passwordField" id="idpasswordField">
+        <br>
+        <label for="gender">Gender</label>
+        <fieldset id="gender">
+            <input type="radio" name="gender" id="idgenderRadio1" value="Laki-laki" checked>Laki-laki
+            <input type="radio" name="gender" id="idgenderRadio2" value="Perempuan">Perempuan
+        </fieldset>
         <br>
         <input type="submit" value="Add data">
 

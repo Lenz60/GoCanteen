@@ -17,9 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.blitzkriegproject.gocanteen.HomeActivity;
 import com.blitzkriegproject.gocanteen.R;
-import com.blitzkriegproject.gocanteen.model.AppVar;
 
 import java.util.HashMap;
 import java.util.Map;
