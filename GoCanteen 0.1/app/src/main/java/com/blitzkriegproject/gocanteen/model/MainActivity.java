@@ -15,7 +15,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -36,7 +39,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     EditText editTextNIM ,editTextNama, editTextEmail, editTextPassword;
     RadioGroup radioGroupGender;
-    Button LoginButton,RegisterButton;
+    Button RegisterButton;
+    TextView textViewLogin;
     ProgressBar progressBar;
 
     @Override
@@ -59,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         radioGroupGender = (RadioGroup) findViewById(R.id.radioGender);
         RegisterButton = (Button) findViewById(R.id.buttonRegister);
-        LoginButton = (Button) findViewById(R.id.buttonLogin);
+        textViewLogin = (TextView) findViewById(R.id.textViewLogin);
 
         RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,18 +72,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //LoginButton.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-          //  public void onClick(View v) {
-           //     finish();
-           //     startActivity(new Intent(MainActivity.this, Login.class));
-           // }
-       // });
+        textViewLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(MainActivity.this, Login.class));
+            }
+        });
     }
     private void registerUser(){
         final String NIM = editTextNIM.getText().toString().trim();
-        final String nama = editTextNIM.getText().toString().trim();
         final String email = editTextNIM.getText().toString().trim();
+        final String nama = editTextNIM.getText().toString().trim();
         final String password = editTextNIM.getText().toString().trim();
 
         final String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
@@ -129,9 +133,9 @@ public class MainActivity extends AppCompatActivity {
                                 //creating a new user object
                                 User user = new User(
                                         userJson.getInt("id"),
-                                        userJson.getString("NIM"),
-                                        userJson.getString("nama"),
+                                        userJson.getString("nim"),
                                         userJson.getString("email"),
+                                        userJson.getString("nama"),
                                         userJson.getString("password"),
                                         userJson.getString("gender")
                                         );
@@ -154,14 +158,17 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+
                         Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 }) {
+
+            @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("NIM",NIM);
-                params.put("nama",nama);
+                params.put("nim",NIM);
                 params.put("email",email);
+                params.put("nama",nama);
                 params.put("password",password);
                 params.put("gender",gender);
                 return params;
