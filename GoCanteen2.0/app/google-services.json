@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "755011222249",
+    "firebase_url": "https://dystopiaproject-4a564.firebaseio.com",
+    "project_id": "dystopiaproject-4a564",
+    "storage_bucket": "dystopiaproject-4a564.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755011222249:android:ba7ef888c438ddf4cbce78",
+        "android_client_info": {
+          "package_name": "com.dystopiaproject.gocanteen2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755011222249-nhs22dcdg0hflk5jkqr8j6eeugc7iu09.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dystopiaproject.gocanteen2",
+            "certificate_hash": "86f91f85e58bc15b0e36c9111e1f9103097ef733"
+          }
+        },
+        {
+          "client_id": "755011222249-igjrjfnuh0a3lood0lmq1kn06uuu8tr4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI5sJ-FIvZs6ddKXmXieV-mWd5CW0k_nQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755011222249-igjrjfnuh0a3lood0lmq1kn06uuu8tr4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
