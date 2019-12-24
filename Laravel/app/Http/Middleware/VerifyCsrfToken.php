@@ -19,6 +19,11 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+        'pembeli/*',
+        '/webhook/*',
+        '/pembeli/*',
+        'webhook/pembeli/*'
         //
+
     ];
 }
