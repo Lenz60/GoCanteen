@@ -12,15 +12,16 @@
 */
 
 
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
 
-Route::get('/pembeli/login','PembeliController@login');
-Route::get('/pembeli/register','ApiController@index');
-Route::get('/pembeli','PembeliController@index');
-Route::get('/pembeli/adduser','PembeliController@add');
-Route::post('/pembeli/storedata','PembeliController@store');
+Route::get('pembeli/login','PembeliController@login');
+Route::get('pembeli/register','ApiController@index');
+Route::get('pembeli','PembeliController@index');
+Route::get('pembeli/adduser','PembeliController@add');
+Route::post('pembeli/storedata','PembeliController@store');
 
 

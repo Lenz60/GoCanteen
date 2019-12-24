@@ -25,7 +25,7 @@ class PembeliController extends Controller
     public function store(Request $request){
         //insert data to table pembeli
         DB::table('users')->insert([
-            'NIM' => $request->NIMField,
+            'nim' => $request->NIMField,
             'nama' => $request->namaField,
             'email' => $request->emailField,
             'password' => $request->passwordField,

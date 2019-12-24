@@ -21,7 +21,7 @@
         </tr>
         @foreach ($pembeli as $pem)
         <tr>
-            <td>{{ $pem->NIM }}</td>
+            <td>{{ $pem->nim }}</td>
             <td>{{ $pem->nama }}</td>
             <td>{{ $pem->gender }}</td>
             <td>{{ $pem->email }}</td>

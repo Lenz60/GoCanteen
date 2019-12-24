@@ -1,3 +1,5 @@
+
+
 <?php
 //
   
@@ -18,17 +20,17 @@
             case 'register' :
                 //code for register
                 //checking the parameters required are available or not
-                if(isTheseParametersAvailable(array('NIM','nama','email','password','gender'))){
+                if(isTheseParametersAvailable(array('nim','nama','email','password','gender'))){
 
                     //getting values
-                    $username = $_POST['NIM'];
+                    $nim = $_POST['nim'];
                     $nama = $_POST['nama'];
                     $email = $_POST['email'];
                     $password = sha1($_POST['password']);
                     $gender = $_POST['gender'];
 
-                    $stmt = $conn->prepare('SELECT id FROM users WHERE NIM = ? OR email = ?');
-                    $stmt-> bind_Param("ss",$NIM,$email);
+                    $stmt = $conn->prepare('SELECT id FROM users WHERE nim = ? OR email = ?');
+                    $stmt-> bind_Param("ss",$nim,$email);
                     $stmt->execute();
                     $stmt->store_result();
 
@@ -40,22 +42,22 @@
                     }
                     else{
                         //if user is  new creating an insert query
-                        $stmt = $conn->prepare("INSERT INTO users (NIM, nama, email, password, gender) VALUES (?,?,?,?,?)");
-                        $stmt->bind_param("sssss",$NIM,$nama,$email,$password,$gender);
+                        $stmt = $conn->prepare("INSERT INTO users (nim, nama, email, password, gender) VALUES (?,?,?,?,?)");
+                        $stmt->bind_param("sssss",$nim,$nama,$email,$password,$gender);
 
                         //if user added succesfully to database
                         if($stmt->execute()){
                             
                             //fetching the user back
-                            $stmt = $conn->prepare("SELECT id, id, NIM, nama, email, gender FROM users WHERE NIM = ?");
-                            $stmt->bind_param("s",$NIM);
+                            $stmt = $conn->prepare("SELECT id, id, nim, nama, email, gender FROM users WHERE nim = ?");
+                            $stmt->bind_param("s",$nim);
                             $stmt->execute();
-                            $stmt->bind_result($userid,$id,$NIM,$nama,$email,$gender);
+                            $stmt->bind_result($userid,$id,$nim,$nama,$email,$gender);
                             $stmt->fetch();
 
                             $user = array(
                                 'id'=>$id,
-                                'NIM'=>$nim,
+                                'nim'=>$nim,
                                 'nama'=>$nama,
                                 'email'=>$email,
                                 'gender'=>$gender
@@ -80,14 +82,14 @@
             case 'login':
                 //code for login
                 //for login we need the username and password 
-				if(isTheseParametersAvailable(array('NIM', 'password'))){
+				if(isTheseParametersAvailable(array('nim', 'password'))){
 					//getting values 
-					$username = $_POST['NIM'];
+					$nim = $_POST['nim'];
 					$password = sha1($_POST['password']); 
 					
 					//creating the query 
-					$stmt = $conn->prepare("SELECT id, NIM, nama, email, gender FROM users WHERE NIM = ? AND password = ?");
-					$stmt->bind_param("ss",$NIM, $password);
+					$stmt = $conn->prepare("SELECT id, nim, nama, email, gender FROM users WHERE nim = ? AND password = ?");
+					$stmt->bind_param("ss",$nim, $password);
 					
 					$stmt->execute();
 					
@@ -96,12 +98,12 @@
 					//if the user exist with given credentials 
 					if($stmt->num_rows > 0){
 						
-						$stmt->bind_result($id, $NIM, $email, $gender);
+						$stmt->bind_result($id, $nim, $email, $gender);
 						$stmt->fetch();
 						
 						$user = array(
 							'id'=>$id, 
-							'NIM'=>$username, 
+							'nim'=>$nim, 
 							'email'=>$email,
 							'nama'=>$nama,
 							'gender'=>$gender
@@ -149,3 +151,5 @@
         //return true if every param is available 
         return true; 
     }
+
+
