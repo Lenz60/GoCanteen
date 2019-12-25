@@ -7,18 +7,18 @@
 3. If you want to test the API, use POSTMAN
     - Use it like this : 
        > **For Register** `localhost/api.php?apicall=signup`
-       -----------------------------------------------------
+       
        > **For login** `localhost/api.php?apicall=register`
 4. Check your ipv4 at `ipconfig -all` using cmd
 5. Change the url at the Android Studio to your ipv4
     - Use it like this : 
       >**For Register** `http://*yourIP*/api.php?apicall=signup`
-      -----------------------------------------------------
+      
       >**For login** `http://*yourIP*/api.php?apicall=register`
 6. Use Laravel to check the table `php artisan serve` at folder **Laravel**
 7. Check the users table at this route `localhost:8000/pembeli` or `http://127.0.0.1:8000/pembeli/`
 8. Then You are done 
-#########################################################################################
+########################################################################################
 
 There is 2 different method that successfully coded with Login & Register 
 
