@@ -1,9 +1,8 @@
-package com.blitzkriegproject.gocanteen;
+package com.blitzkriegproject.gocanteen.model;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,11 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.blitzkriegproject.gocanteen.model.MainActivity;
-import com.blitzkriegproject.gocanteen.model.SharedPrefmanager;
-import com.blitzkriegproject.gocanteen.model.URLs;
-import com.blitzkriegproject.gocanteen.model.User;
-import com.blitzkriegproject.gocanteen.model.VolleySingleton;
+import com.blitzkriegproject.gocanteen.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

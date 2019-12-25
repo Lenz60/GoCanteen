@@ -3,26 +3,23 @@ package com.blitzkriegproject.gocanteen.model;
 public class User {
 
    private int id;
-   private String NIM, nama, email, gender;
+   private String nim, nama, email, gender;
 
-    public User(int id, String NIM, String nama, String email, String password) {
+
+    public User(int id, String nim, String nama, String email, String gender) {
         this.id = id;
-        this.NIM = NIM;
+        this.nim = nim;
         this.nama = nama;
         this.email = email;
-        this.gender = password;
-    }
-
-    public User(int id, String nim, String nama, String email, String password, String gender) {
-        
+        this.gender = gender;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getNIM() {
-        return NIM;
+    public String getNim() {
+        return nim;
     }
 
     public String getNama() {

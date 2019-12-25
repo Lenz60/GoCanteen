@@ -1,4 +1,4 @@
-package com.blitzkriegproject.gocanteen;
+package com.blitzkriegproject.gocanteen.model;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blitzkriegproject.gocanteen.R;
+import com.blitzkriegproject.gocanteen.model.Login;
 import com.blitzkriegproject.gocanteen.model.SharedPrefmanager;
 import com.blitzkriegproject.gocanteen.model.User;
-
-import org.w3c.dom.Text;
 
 public class Profile extends AppCompatActivity {
 
@@ -39,7 +39,7 @@ public class Profile extends AppCompatActivity {
 
             //setting value to the textview
             textViewid.setText(String.valueOf(user.getId()));
-            textViewNIM.setText(user.getNIM());
+            textViewNIM.setText(user.getNim());
             textViewNama.setText(user.getNama());
             textViewEmail.setText(user.getEmail());
             textViewGender.setText(user.getGender());

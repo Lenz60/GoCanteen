@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.blitzkriegproject.gocanteen.Login;
-
 public class SharedPrefmanager {
 
     //constants
@@ -37,7 +35,7 @@ public class SharedPrefmanager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(KEY_ID, user.getId());
-        editor.putString(KEY_NIM, user.getNIM());
+        editor.putString(KEY_NIM, user.getNim());
         editor.putString(KEY_NAMA, user.getNama());
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_GENDER, user.getGender());
