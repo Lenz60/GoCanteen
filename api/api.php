@@ -59,10 +59,10 @@
 			
 			case 'login':
 				
-				if(isTheseParametersAvailable(array('nim', 'password'))){
+				if(isTheseParametersAvailable(array('nim','password'))){
 					
 					$nim = $_POST['nim'];
-					$password = md5($_POST['password']); 
+					$password = ($_POST['password']); 
 					
 					$stmt = $conn->prepare("SELECT id, nim, email, nama, gender FROM users WHERE nim = ? AND password = ?");
 					$stmt->bind_param("ss",$nim, $password);
