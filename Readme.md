@@ -2,7 +2,7 @@
 
 ########################################################################################
 ## WHAT TO DO FIRST
-1. Import the mysql Database, the .sql is located at QueryDB folder
+1. Import the mysql Database, the .sql is located at [**QueryDB**](/QueryDB)
 2. Copy the `api.php` and `dbconnectapi.php` to your localhost directory
 3. If you want to test the API, use [POSTMAN](https://www.getpostman.com/downloads/)
     - Use it like this : 
