@@ -25,11 +25,11 @@ There is 2 different method that successfully coded with Login & Register
 1. ## **GoCanteen 0.1**
     - This Project is first coded project that using Volley lib as android library, this project already have logout function in it 
       so we can just modify the UI 
-    -if you want to use it just change the IP at URLs.java and change it with your ipv4
+    - if you want to use it just change the IP at URLs.java and change it with your ipv4
 2. ## **GoCanteen 1.5**
     - This Project is the last coded project that using Retrofit lib as android library, this project **don't have** logout function in it,
       just simple Login and Register 
-    -if you want to use it just change the IP at UtilsApi.java and change it with your ipv4
+    - if you want to use it just change the IP at UtilsApi.java and change it with your ipv4
     
 ## TODO List
 - [x] Create Login & Register
