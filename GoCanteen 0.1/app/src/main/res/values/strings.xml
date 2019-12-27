@@ -3,4 +3,5 @@
     <string name="Username">Username</string>
     <string name="Password">Password</string>
     <string name="NIM">NIM</string>
+    <string name="title_activity_splash">Splash</string>
 </resources>
