@@ -1,4 +1,4 @@
-package com.blitzkriegproject.gocanteen;
+package com.blitzkriegproject.gocanteen.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.blitzkriegproject.gocanteen.R;
 import com.blitzkriegproject.gocanteen.model.MainActivity;
 
 public class Splash extends AppCompatActivity {
@@ -17,7 +18,7 @@ public class Splash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(Splash.this, MainActivity.class);
+                Intent intent = new Intent(Splash.this, BottomNavbar.class);
                 startActivity(intent);
                 finish();
             }

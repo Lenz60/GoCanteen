@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blitzkriegproject.gocanteen.ProfileFragment;
 import com.blitzkriegproject.gocanteen.R;
 import com.blitzkriegproject.gocanteen.model.Login;
 import com.blitzkriegproject.gocanteen.model.SharedPrefmanager;
@@ -20,6 +21,8 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+
 
         //if user not logged in
         //starting login activity
