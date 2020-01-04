@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.blitzkriegproject.gocanteen.CartFragment;
 import com.blitzkriegproject.gocanteen.HomeFragment;
@@ -15,12 +18,17 @@ import com.blitzkriegproject.gocanteen.NotificationFragment;
 import com.blitzkriegproject.gocanteen.ProfileFragment;
 import com.blitzkriegproject.gocanteen.R;
 import com.blitzkriegproject.gocanteen.TokoFragment;
+import com.blitzkriegproject.gocanteen.model.Login;
 import com.blitzkriegproject.gocanteen.model.Profile;
+import com.blitzkriegproject.gocanteen.model.SharedPrefmanager;
+import com.blitzkriegproject.gocanteen.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class BottomNavbar extends AppCompatActivity {
+
+    TextView TxtvNama;
 
     private ActionBar toolbar;
 
@@ -28,6 +36,10 @@ public class BottomNavbar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom_navbar);
+
+
+
+
 
         toolbar = getSupportActionBar();
 
@@ -38,6 +50,21 @@ public class BottomNavbar extends AppCompatActivity {
         loadFragment(new HomeFragment());
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
+        //Check if login
+        if(!SharedPrefmanager.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(this, Login.class));
+        }
+
+
+        //TxtvNama = (TextView) findViewById(R.id.TxtvNama);
+
+        //get value
+        //User user = SharedPrefmanager.getInstance(this).getUser();
+
+        //TxtvNama.setText(user.getNama().toString());
 
 
 
@@ -83,5 +110,10 @@ public class BottomNavbar extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public void logout(View view) {
+        finish();
+        SharedPrefmanager.getInstance(getApplicationContext()).logout();
     }
 }
