@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,26 +8,36 @@
     tools:context=".model.Login">
 
 
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        app:srcCompat="@drawable/logo" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/logo" />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="25dp">
 
 
         <EditText
             android:id="@+id/editTextNIM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:hint="NIM"
             android:inputType="text" />
 
@@ -35,8 +45,8 @@
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif"
             android:hint="Password"
             android:inputType="textPassword" />
@@ -45,16 +55,16 @@
             android:id="@+id/buttonLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Login" />
 
         <TextView
             android:id="@+id/textViewRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Dont' have an account?\nRegister Here"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
@@ -68,4 +78,4 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
-</RelativeLayout>
+</LinearLayout>
