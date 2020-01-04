@@ -26,6 +26,8 @@ There is 2 different method that successfully coded with Login & Register
     - This Project is first coded project that using Volley lib as android library, this project already have logout function in it 
       so we can just modify the UI 
     - if you want to use it just change the IP at URLs.java and change it with your ipv4
+    - # **CHANGED APP MANIFEST THAT LUNCH FROM Splash -> Main Activity to Splash -> Bottom NavBar**
+    - # **CHANGE IT TO DEFAULT (Splash -> Main Activity) IF YOU WANT TO MODIFY THE CHANGES**
 2. ## **GoCanteen 1.5**
     - This Project is the last coded project that using Retrofit lib as android library, this project **don't have** logout function in it,
       just simple Login and Register 
@@ -34,13 +36,13 @@ There is 2 different method that successfully coded with Login & Register
 ## TODO List
 - [x] Create Login & Register
 - [x] Create Logout session (done in GoCanteen 0.1)
-- [ ] Create animated splash screen (Require Logo)
+- [x] Create ~~animated~~ splash screen (Require Logo)
 - [ ] Finish Up the Database
-- [ ] Create Button Navigation Bar
-   - [ ] Create Notification page 
-   - [ ] Create Profile page
-   - [ ] Create Checkout page
-   - [ ] Create Canteen Stall page
-   - [ ] Create Home Page
+- [x] Create Button Navigation Bar
+   - [x] Create Notification ~~page~~ Fragment
+   - [x] Create Profile ~~page~~ Fragment
+   - [x] Create Checkout ~~page~~ Fragment
+   - [x] Create Canteen Stall ~~page~~ Fragment
+   - [x] Create Home ~~page~~ Fragment
 - [ ] Create Query Logic for Recomendated Food
 
