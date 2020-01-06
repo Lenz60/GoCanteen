@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddSaldo"></activity>
+        <activity android:name=".model.AddSaldoActivity"></activity>
         <activity android:name=".PPActivity" />
         <activity android:name=".view.BottomNavbar" />
         <activity android:name=".model.Login" />

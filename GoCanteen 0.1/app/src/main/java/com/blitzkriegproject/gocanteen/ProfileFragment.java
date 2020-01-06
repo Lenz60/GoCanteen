@@ -1,11 +1,8 @@
 package com.blitzkriegproject.gocanteen;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.fragment.app.Fragment;
 
@@ -16,11 +13,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blitzkriegproject.gocanteen.model.Login;
-import com.blitzkriegproject.gocanteen.model.Profile;
 import com.blitzkriegproject.gocanteen.model.SharedPrefmanager;
 import com.blitzkriegproject.gocanteen.model.User;
-import com.blitzkriegproject.gocanteen.view.BottomNavbar;
+import com.blitzkriegproject.gocanteen.model.AddSaldoActivity;
+
 
 
 /**
@@ -121,10 +117,10 @@ public class ProfileFragment extends Fragment {
         });
 
         //addSaldo
-        AddPP.setOnClickListener(new View.OnClickListener() {
+        AddSaldo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),AddSaldo.class);
+                Intent intent = new Intent(getActivity(), AddSaldoActivity.class);
                 startActivity(intent);
             }
         });
