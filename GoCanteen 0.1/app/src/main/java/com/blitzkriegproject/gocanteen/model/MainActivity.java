@@ -27,8 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    EditText editTextNIM ,editTextNama, editTextEmail, editTextPassword;
-    RadioGroup radioGroupGender;
+    EditText  editTextName, editTextEmail, editTextPassword;
     ProgressBar progressBar;
 
     @Override
@@ -45,11 +44,10 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        editTextNIM = (EditText) findViewById(R.id.editTextNIM);
-        editTextNama = (EditText) findViewById(R.id.editTextNama);
+        editTextName = (EditText) findViewById(R.id.editTextName);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        radioGroupGender = (RadioGroup) findViewById(R.id.radioGender);
+
 
 
         findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
@@ -68,22 +66,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void registerUser(){
-        final String nim = editTextNIM.getText().toString().trim();
+        final String name = editTextName.getText().toString().trim();
         final String email = editTextEmail.getText().toString().trim();
-        final String nama = editTextNama.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
 
-        final String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
 
         //validation
-        if (TextUtils.isEmpty(nim)){
-            editTextNIM.setError("Masukkan NIM anda");
-            editTextNIM.requestFocus();
-            return;
-        }
-        if (TextUtils.isEmpty(nama)){
-            editTextNama.setError("Masukkan nama anda");
-            editTextNama.requestFocus();
+
+        if (TextUtils.isEmpty(name)){
+            editTextName.setError("Please enter your name");
+            editTextName.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(email)) {
@@ -99,9 +91,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
         if (TextUtils.isEmpty(password)){
-            editTextPassword.setError("Masukkan password anda");
+            editTextPassword.setError("Please enter your password");
             editTextPassword.requestFocus();
             return;
         }
@@ -126,10 +117,9 @@ public class MainActivity extends AppCompatActivity {
                                 //creating a new user object
                                 User user = new User(
                                         userJson.getInt("id"),
-                                        userJson.getString("nim"),
-                                        userJson.getString("nama"),
+                                        userJson.getString("name"),
                                         userJson.getString("email"),
-                                        userJson.getString("gender")
+                                        "0"
                                 );
 
                                 //storing the user in shared preferences
@@ -156,11 +146,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("nim", nim);
-                params.put("nama", nama);
+                params.put("name", name);
                 params.put("email", email);
                 params.put("password", password);
-                params.put("gender", gender);
                 return params;
             }
         };

@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
-    EditText editTextNIM, editTextPassword;
+    EditText editTextEmail, editTextPassword;
     ProgressBar progressBar;
 
     @Override
@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
         }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        editTextNIM = (EditText) findViewById(R.id.editTextNIM);
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 
         //if user presses on login
@@ -64,18 +64,18 @@ public class Login extends AppCompatActivity {
 
     private void userLogin(){
         //first getting values
-        final String nim = editTextNIM.getText().toString();
+        final String email = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();
 
         //validating inputs
-        if (TextUtils.isEmpty(nim)){
-            editTextNIM.setError("Masukkan NIM anda");
-            editTextNIM.requestFocus();
+        if (TextUtils.isEmpty(email)){
+            editTextEmail.setError("Please enter your Email");
+            editTextEmail.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)){
-            editTextPassword.setError("Masukkan NIM anda");
+            editTextPassword.setError("Please enter your Password");
             editTextPassword.requestFocus();
             return;
         }
@@ -100,10 +100,9 @@ public class Login extends AppCompatActivity {
 
                                 User user = new User(
                                         userJson.getInt("id"),
-                                        userJson.getString("nim"),
-                                        userJson.getString("nama"),
+                                        userJson.getString("name"),
                                         userJson.getString("email"),
-                                        userJson.getString("gender")
+                                        userJson.getString("saldo")
                                 );
 
                                 //storing the user in shared preferences
@@ -129,7 +128,7 @@ public class Login extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map <String, String> params = new HashMap<>();
-                params.put("nim", nim);
+                params.put("email", email);
                 params.put("password", password);
                 return params;
             }

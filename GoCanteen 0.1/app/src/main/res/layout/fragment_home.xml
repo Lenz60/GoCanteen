@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="276dp"
+        android:orientation="vertical"
         android:gravity="center"
-        android:text="@string/title_home" />
+        android:layout_marginTop="100dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/TxtvNameH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="35sp"
+            android:textColor="@color/WelcomeHello"
+            android:gravity="center"/>
+
+    </LinearLayout>
+</LinearLayout>

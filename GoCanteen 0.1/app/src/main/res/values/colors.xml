@@ -7,4 +7,6 @@
     <color name="BG2">#D81B60</color>
     <color name="BGCover">#CE4094FF</color>
     <color name="BGBottomNav">#A147FF</color>
+    <color name="GreenSaldo">#3B8F00</color>
+    <color name="WelcomeHello">#2299F3</color>
 </resources>

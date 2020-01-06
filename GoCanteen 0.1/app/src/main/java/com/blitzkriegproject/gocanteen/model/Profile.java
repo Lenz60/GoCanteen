@@ -43,10 +43,8 @@ public class Profile extends AppCompatActivity {
 
         //setting value to the textview
         textViewid.setText(String.valueOf(user.getId()));
-        textViewNIM.setText(user.getNim());
-        textViewNama.setText(user.getNama());
+        textViewNama.setText(user.getName());
         textViewEmail.setText(user.getEmail());
-        textViewGender.setText(user.getGender());
 
         //when the user presses logout
         //calling logout method

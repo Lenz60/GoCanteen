@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blitzkriegproject.gocanteen.CartFragment;
@@ -28,9 +29,9 @@ import com.google.android.material.navigation.NavigationView;
 
 public class BottomNavbar extends AppCompatActivity {
 
-    TextView TxtvNama;
-
-    private ActionBar toolbar;
+    //declaration
+    ImageView logoutIcon;
+    BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +41,7 @@ public class BottomNavbar extends AppCompatActivity {
 
 
 
-
-        toolbar = getSupportActionBar();
-
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //default fragment
@@ -58,13 +56,6 @@ public class BottomNavbar extends AppCompatActivity {
             startActivity(new Intent(this, Login.class));
         }
 
-
-        //TxtvNama = (TextView) findViewById(R.id.TxtvNama);
-
-        //get value
-        //User user = SharedPrefmanager.getInstance(this).getUser();
-
-        //TxtvNama.setText(user.getNama().toString());
 
 
 
@@ -97,6 +88,7 @@ public class BottomNavbar extends AppCompatActivity {
                 case R.id.navigation_profile :
                     fragment = new ProfileFragment();
                     break;
+                    
             }
             return loadFragment(fragment);
         }
@@ -112,8 +104,4 @@ public class BottomNavbar extends AppCompatActivity {
         return false;
     }
 
-    public void logout(View view) {
-        finish();
-        SharedPrefmanager.getInstance(getApplicationContext()).logout();
-    }
 }

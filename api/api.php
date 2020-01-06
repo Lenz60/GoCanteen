@@ -8,15 +8,13 @@
 		switch($_GET['apicall']){
 			
 			case 'signup':
-				if(isTheseParametersAvailable(array('nim','email','nama','password','gender'))){
-					$nim = $_POST['nim']; 
+				if(isTheseParametersAvailable(array('name','email','password'))){
+					$name = $_POST['name']; 
 					$email = $_POST['email']; 
-					$nama = $_POST['nama']; 
-					$password = md5($_POST['password']);
-					$gender = $_POST['gender']; 
+					$password = ($_POST['password']);
 					
-					$stmt = $conn->prepare("SELECT id FROM users WHERE nim = ? OR email = ?");
-					$stmt->bind_param("ss", $nim, $email);
+					$stmt = $conn->prepare("SELECT id FROM user WHERE email = ?");
+					$stmt->bind_param("s", $email);
 					$stmt->execute();
 					$stmt->store_result();
 					
@@ -25,21 +23,19 @@
 						$response['message'] = 'User already registered';
 						$stmt->close();
 					}else{
-						$stmt = $conn->prepare("INSERT INTO users (nim, email, nama, password, gender) VALUES (?, ?, ?, ?, ?)");
-						$stmt->bind_param("sssss", $nim, $email, $nama, $password, $gender);
+						$stmt = $conn->prepare("INSERT INTO user (name, email, password) VALUES (?, ?, ?)");
+						$stmt->bind_param("sss", $name, $email, $password);
 						if($stmt->execute()){
-							$stmt = $conn->prepare("SELECT id, id, nim, email, nama, gender FROM users WHERE nim = ?"); 
-							$stmt->bind_param("s",$nim);
+							$stmt = $conn->prepare("SELECT id, id, name, email FROM user WHERE email = ?"); 
+							$stmt->bind_param("s",$email);
 							$stmt->execute();
-							$stmt->bind_result($userid, $id, $nim, $email, $nama, $gender);
+							$stmt->bind_result($userid, $id, $name, $email);
 							$stmt->fetch();
 							
 							$user = array(
 								'id'=>$id, 
-								'nim'=>$nim, 
-								'email'=>$email,
-								'nama'=>$nama,
-								'gender'=>$gender
+								'name'=>$name, 
+								'email'=>$email
 							);
 							
 							$stmt->close();
@@ -59,13 +55,13 @@
 			
 			case 'login':
 				
-				if(isTheseParametersAvailable(array('nim','password'))){
+				if(isTheseParametersAvailable(array('email','password'))){
 					
-					$nim = $_POST['nim'];
-					$password = md5($_POST['password']); 
+					$email = $_POST['email'];
+					$password = ($_POST['password']); 
 					
-					$stmt = $conn->prepare("SELECT id, nim, email, nama, gender FROM users WHERE nim = ? AND password = ?");
-					$stmt->bind_param("ss",$nim, $password);
+					$stmt = $conn->prepare("SELECT id, name, email FROM user WHERE email = ? AND password = ? ");
+					$stmt->bind_param("ss",$email, $password);
 					
 					$stmt->execute();
 					
@@ -73,15 +69,13 @@
 					
 					if($stmt->num_rows > 0){
 						
-						$stmt->bind_result($id, $nim, $email, $nama, $gender);
+						$stmt->bind_result($id, $name, $email);
 						$stmt->fetch();
 						
 						$user = array(
 							'id'=>$id, 
-							'nim'=>$nim, 
-							'email'=>$email,
-							'nama'=>$nama,
-							'gender'=>$gender
+							'name'=>$name, 
+							'email'=>$email
 						);
 						
 						$response['error'] = false; 
@@ -89,7 +83,7 @@
 						$response['user'] = $user; 
 					}else{
 						$response['error'] = false; 
-						$response['message'] = 'Invalid nim or password';
+						$response['message'] = 'Invalid email or password';
 					}
 				}
 			break; 

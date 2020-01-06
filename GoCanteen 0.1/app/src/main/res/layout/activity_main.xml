@@ -16,21 +16,12 @@
         android:padding="10dp">
 
         <EditText
-            android:id="@+id/editTextNama"
+            android:id="@+id/editTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:hint="Nama"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/editTextNIM"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:hint="NIM"
+            android:hint="Name"
             android:inputType="text" />
 
         <EditText
@@ -52,30 +43,6 @@
             android:hint="Password"
             android:inputType="textPassword" />
 
-
-        <RadioGroup
-            android:id="@+id/radioGender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioButtonMale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Laki-laki" />
-
-
-            <RadioButton
-                android:id="@+id/radioButtonFemale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Perempuan" />
-
-        </RadioGroup>
 
         <Button
             android:id="@+id/buttonRegister"

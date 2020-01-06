@@ -30,7 +30,7 @@
                 app:civ_border_color="#FFFFFF"/>
 
             <TextView
-                android:id="@+id/TxtvNama"
+                android:id="@+id/TxtvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="14dp"
@@ -43,11 +43,6 @@
     </LinearLayout>
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/title_profile" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,8 +56,56 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
             android:layout_gravity="right"
-            android:src="@drawable/logout"
-            android:onClick="logout"/>
+            android:src="@drawable/logout"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="148dp"
+        android:layout_marginTop="150dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/TxtvSaldo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="35sp"
+            android:textColor="@color/GreenSaldo"
+            android:text="SALDO" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/BtnAddSaldo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Saldo" />
+
+        <Button
+            android:id="@+id/BtnEditPP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile Picture" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
     </LinearLayout>
 
 </FrameLayout>

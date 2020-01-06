@@ -2,35 +2,31 @@ package com.blitzkriegproject.gocanteen.model;
 
 public class User {
 
-   private int id;
-   private String nim, nama, email, gender;
+    private int id;
+    private String name, email, saldo;
 
-
-    public User(int id, String nim, String nama, String email, String gender) {
+    public User(int id, String name, String email, String saldo) {
         this.id = id;
-        this.nim = nim;
-        this.nama = nama;
+        this.name = name;
         this.email = email;
-        this.gender = gender;
+        this.saldo = saldo;
     }
+
+
 
     public int getId() {
         return id;
     }
 
-    public String getNim() {
-        return nim;
-    }
-
-    public String getNama() {
-        return nama;
+    public String getName() {
+        return name;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getGender() {
-        return gender;
+    public String getSaldo() {
+        return saldo;
     }
 }

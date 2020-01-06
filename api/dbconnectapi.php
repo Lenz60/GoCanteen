@@ -6,7 +6,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "db_gocanteen";
+$database = "db_kantinamikom";
  
  
 //creating a new connection object using mysqli 
