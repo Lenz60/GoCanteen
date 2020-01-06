@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -25,49 +24,41 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddSaldoActivity extends AppCompatActivity {
-
-    ImageView ImgBack;
-    Button BtnAddSaldo;
+public class TopUpVerif extends AppCompatActivity {
+    EditText editTextPasswordV;
     ProgressBar progressBar;
-    EditText EditTextCode;
+    Button BtnConfirm;
+    User user;
+    String TempEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_saldo);
+        setContentView(R.layout.activity_top_up_verif);
 
-        ImgBack = (ImageView) findViewById(R.id.ImgBack);
-        EditTextCode = (EditText) findViewById(R.id.EdtxAddSaldo);
-        BtnAddSaldo = (Button) findViewById(R.id.BtnAddSaldo);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        editTextPasswordV = (EditText) findViewById(R.id.editTextPasswordV);
+        BtnConfirm = (Button) findViewById(R.id.BtnConfirm);
 
-        ImgBack.setOnClickListener(new View.OnClickListener() {
+        user = (User) SharedPrefmanager.getInstance(this).getUser();
+
+
+        BtnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddSaldoActivity.this, BottomNavbar.class);
-                startActivity(intent);
-                finish();
+                verify();
             }
         });
+        TempEmail = user.getEmail();
 
-        BtnAddSaldo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                topup();
-            }
-        });
 
 
     }
 
-    private void topup() {
-        progressBar.setVisibility(View.VISIBLE);
-
-        User user = SharedPrefmanager.getInstance(this).getUser();
-        final String code = EditTextCode.getText().toString();
-        final Integer id = user.getId();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_TOPUP,
+    private void verify() {
+        //logout current session
+        final String email = TempEmail;
+        final String password = editTextPasswordV.getText().toString();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_LOGIN,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -81,22 +72,22 @@ public class AddSaldoActivity extends AppCompatActivity {
                             if (!obj.getBoolean("error")) {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
-//                                //getting the user from the response
-//                                JSONObject userJson = obj.getJSONObject("user");
-//
-//                                User user = new User(
-//                                        userJson.getInt("id"),
-//                                        userJson.getString("name"),
-//                                        userJson.getString("email"),
-//                                        userJson.getString("saldo")
-//                                );
-//
-//                                //storing the user in shared preferences
-//                                SharedPrefmanager.getInstance(getApplicationContext()).userLogin(user);
+                                //getting the user from the response
+                                JSONObject userJson = obj.getJSONObject("user");
+
+                                User user = new User(
+                                        userJson.getInt("id"),
+                                        userJson.getString("name"),
+                                        userJson.getString("email"),
+                                        userJson.getString("saldo")
+                                );
+
+                                //storing the user in shared preferences
+                                SharedPrefmanager.getInstance(getApplicationContext()).userLogin(user);
 
                                 //starting the profile activity
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), TopUpVerif.class));
+                                startActivity(new Intent(getApplicationContext(), BottomNavbar.class));
                             } else {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }
@@ -114,13 +105,12 @@ public class AddSaldoActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map <String, String> params = new HashMap<>();
-                params.put("code", code);
-                params.put("id", id.toString());
+                params.put("email", email);
+                params.put("password", password);
                 return params;
             }
         };
 
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-
     }
 }

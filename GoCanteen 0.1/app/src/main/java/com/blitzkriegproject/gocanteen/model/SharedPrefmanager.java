@@ -13,6 +13,8 @@ public class SharedPrefmanager {
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_SALDO = "keyemail";
     private static final String KEY_ID = "keyid";
+    private static final String KEY_CODE = "code";
+    private static final String KEY_AMOUNT = "amount";
 
     private static SharedPrefmanager mInstance;
     private static Context mCtx;
@@ -40,6 +42,15 @@ public class SharedPrefmanager {
         editor.apply();
     }
 
+    public void userVoucher(Voucher voucher){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(KEY_ID, voucher.getId());
+        editor.putString(KEY_AMOUNT, voucher.getAmount());
+        editor.putString(KEY_CODE, voucher.getCode());
+        editor.apply();
+    }
+
     //check whether user is already logged in or not
     public boolean isLoggedIn(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -57,6 +68,14 @@ public class SharedPrefmanager {
 
 
         );
+    }
+
+    public void clear(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        mCtx.startActivity(new Intent(mCtx, TopUpVerif.class));
     }
 
     //Logout

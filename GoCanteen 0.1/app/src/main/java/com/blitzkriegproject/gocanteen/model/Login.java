@@ -34,10 +34,10 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if(SharedPrefmanager.getInstance(this).isLoggedIn()){
-            finish();
-            startActivity(new Intent(this, Profile.class));
-        }
+//        if(SharedPrefmanager.getInstance(this).isLoggedIn()){
+//            finish();
+//            startActivity(new Intent(this, Profile.class));
+//        }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
