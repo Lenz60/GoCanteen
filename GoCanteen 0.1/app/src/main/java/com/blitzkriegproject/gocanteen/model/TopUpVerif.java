@@ -49,7 +49,7 @@ public class TopUpVerif extends AppCompatActivity {
             }
         });
         TempEmail = user.getEmail();
-
+        //SharedPrefmanager.getInstance(getApplicationContext()).clear();
 
 
     }
@@ -82,12 +82,14 @@ public class TopUpVerif extends AppCompatActivity {
                                         userJson.getString("saldo")
                                 );
 
+
                                 //storing the user in shared preferences
                                 SharedPrefmanager.getInstance(getApplicationContext()).userLogin(user);
 
                                 //starting the profile activity
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), BottomNavbar.class));
+
                             } else {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }

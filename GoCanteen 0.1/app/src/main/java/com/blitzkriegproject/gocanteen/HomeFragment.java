@@ -1,11 +1,19 @@
 package com.blitzkriegproject.gocanteen;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +21,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blitzkriegproject.gocanteen.model.Menu.Bakso;
+import com.blitzkriegproject.gocanteen.model.Menu.Magelangan;
+import com.blitzkriegproject.gocanteen.model.Menu.Mieayam;
 import com.blitzkriegproject.gocanteen.model.SharedPrefmanager;
 import com.blitzkriegproject.gocanteen.model.User;
+import com.blitzkriegproject.gocanteen.view.BottomNavbar;
+import com.blitzkriegproject.gocanteen.view.Splash;
+
+import java.io.ByteArrayOutputStream;
 
 
 /**
@@ -28,8 +43,11 @@ import com.blitzkriegproject.gocanteen.model.User;
 public class HomeFragment extends Fragment {
 
     //deklarasi
-    TextView TxtvNameH;
-
+    TextView TxtvNameH, TxtvMenu1, TxtvMenu2, TxtvMenu3, TxtvPrice1, TxtvPrice2, TxtvPrice3;
+    SwipeRefreshLayout SwipeReload;
+    BottomNavbar BottomnavJava ;
+    ImageView ImgFoodHome1, ImgFoodHome2, ImgFoodHome3;
+    String Menu1,Menu2,Menu3,Price1,Price2,Price3;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,6 +87,8 @@ public class HomeFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
+
         }
     }
 
@@ -76,14 +96,82 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_home, container, false);
+        final View view =  inflater.inflate(R.layout.fragment_home, container, false);
 
         //inisialisasi
+        BottomnavJava = (BottomNavbar)getActivity();
         TxtvNameH = (TextView) view.findViewById(R.id.TxtvNameH);
+        TxtvMenu1 = (TextView) view.findViewById(R.id.TxtvMenu1);
+        TxtvMenu2 = (TextView) view.findViewById(R.id.TxtvMenu2);
+        TxtvMenu3 = (TextView) view.findViewById(R.id.TxtvMenu3);
+        TxtvPrice1 = (TextView) view.findViewById(R.id.TxtvPrice1);
+        TxtvPrice2 = (TextView) view.findViewById(R.id.TxtvPrice2);
+        TxtvPrice3 = (TextView) view.findViewById(R.id.TxtvPrice3);
+        ImgFoodHome1 = (ImageView) view.findViewById(R.id.ImgFoodHome1);
+        ImgFoodHome2 = (ImageView) view.findViewById(R.id.ImgFoodHome2);
+        ImgFoodHome3 = (ImageView) view.findViewById(R.id.ImgFoodHome3);
+        SwipeReload = (SwipeRefreshLayout) view.findViewById(R.id.SwipeReload);
 
-        //set name value
+
+
+
+        //set value
         User user = SharedPrefmanager.getInstance(getActivity()).getUser();
+        Mieayam mieayam = SharedPrefmanager.getInstance(getActivity()).getMieayam();
+        Bakso bakso = SharedPrefmanager.getInstance(getActivity()).getBakso();
+        Magelangan magelangan = SharedPrefmanager.getInstance(getActivity()).getMagelangan();
+
+        Menu1 = mieayam.getName();
+        Menu2 = bakso.getName();
+        Menu3 = magelangan.getName();
+
+        Price1 = String.valueOf(mieayam.getPrice());
+        Price2 = String.valueOf(bakso.getPrice());
+        Price3 = String.valueOf(magelangan.getPrice());
+
         TxtvNameH.setText("Hello " +user.getName());
+        TxtvMenu1.setText(Menu1);
+        TxtvMenu2.setText(Menu2);
+        TxtvMenu3.setText(Menu3);
+        TxtvPrice1.setText("Rp "+Price1);
+        TxtvPrice2.setText("Rp "+Price2);
+        TxtvPrice3.setText("Rp "+Price3);
+
+        SwipeReload.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                SwipeReload.setRefreshing(true);
+                BottomnavJava.GetMieayamMenu();
+                BottomnavJava.GetBaksoMenu();
+                BottomnavJava.GetMagelanganMenu();
+
+            }
+        });
+        SwipeReload.setRefreshing(false);
+
+        TxtvMenu1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Bundle bundle = new Bundle();
+                bundle.putString("FoodName","asd");
+                bundle.putString("Price","aaaaaa");
+
+//                Fragment fragment = new CartFragment();
+//                fragment.setArguments(bundle);
+//                getFragmentManager().beginTransaction()
+//                        .replace(R.id.frame_container, fragment).commit();
+
+                Fragment fragment = new CartFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.frame_container, fragment);
+                fragmentTransaction.commit();
+
+
+            }
+        });
 
         return view;
     }

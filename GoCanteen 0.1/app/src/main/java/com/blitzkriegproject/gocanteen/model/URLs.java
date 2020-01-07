@@ -7,6 +7,9 @@ public class URLs {
     public static final String URL_LOGIN = "http://192.168.1.100/api.php?apicall=login";
     public static final String UPLOAD_URL = "http://192.168.1.100/uplod.php";
     public static final String URL_TOPUP = "http://192.168.1.100/api.php?apicall=topup";
+    public static final String URL_PRODUCT1 = "http://192.168.1.100/api.php?apicall=product=mieayam";
+    public static final String URL_PRODUCT2 = "http://192.168.1.100/api.php?apicall=product=bakso";
+    public static final String URL_PRODUCT3 = "http://192.168.1.100/api.php?apicall=product=magelangan";
 
 
 }

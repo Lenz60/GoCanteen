@@ -3,6 +3,7 @@
     package="com.blitzkriegproject.gocanteen">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".model.TopUpVerif"></activity>
+        <activity android:name=".blank"></activity>
+        <activity android:name=".model.TopUpVerif" />
         <activity android:name=".model.AddSaldoActivity" />
         <activity android:name=".PPActivity" />
         <activity android:name=".view.BottomNavbar" />
