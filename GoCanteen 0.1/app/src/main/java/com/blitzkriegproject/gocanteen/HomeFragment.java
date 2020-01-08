@@ -153,21 +153,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                final Bundle bundle = new Bundle();
-                bundle.putString("FoodName","asd");
-                bundle.putString("Price","aaaaaa");
+//                final Bundle bundle = new Bundle();
+//                bundle.putString("FoodName","asd");
+//                bundle.putString("Price","aaaaaa");
 
-//                Fragment fragment = new CartFragment();
-//                fragment.setArguments(bundle);
-//                getFragmentManager().beginTransaction()
-//                        .replace(R.id.frame_container, fragment).commit();
-
-                Fragment fragment = new CartFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.frame_container, fragment);
-                fragmentTransaction.commit();
+                Intent intent = new Intent(getActivity().getBaseContext(),
+                        HomeToCart.class);
+                intent.putExtra("FoodName", Menu1);
+                intent.putExtra("Price", Price1);
+                getActivity().startActivity(intent);
 
 
             }

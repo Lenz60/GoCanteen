@@ -35,7 +35,7 @@ public class CartFragment extends Fragment {
     ImageView ImgFood1;
     Button BtnAddItemCart, BtnReduceItemCart;
     EditText EdtxItem;
-    String confirm_txt;
+    String strtext1, strtext2;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -124,28 +124,40 @@ public class CartFragment extends Fragment {
 
 
 
+
         Bundle bundle = getArguments();
+        if(bundle != null){
+            strtext1 = bundle.getString("FoodData");
+            strtext2 = bundle.getString("PriceData");
+            TxtvFoodNameCart1.setText(strtext1);
+            TxtvPriceCart1.setText(strtext2);
 
-        if (bundle != null)
-        {
-            String FoodName = bundle.getString("Foodname");
-            String Price = bundle.getString("Price");
-
-            TxtvFoodNameCart1.setText(FoodName.toString());
-            TxtvPriceCart1.setText(Price.toString());
         }
         else {
-            TxtvFoodNameCart1.setVisibility(View.INVISIBLE);
-            TxtvPriceCart1.setVisibility(View.INVISIBLE);
-            ImgFood1.setVisibility(View.INVISIBLE);
-            BtnReduceItemCart.setVisibility(View.INVISIBLE);
-            BtnAddItemCart.setVisibility(View.INVISIBLE);
-            EdtxItem.setVisibility(View.INVISIBLE);
+            TxtvFoodNameCart1.setText("null");
+            TxtvPriceCart1.setText("null");
         }
+
+//        if (bundle != null)
+//        {
+//
+//            TxtvFoodNameCart1.setText(Data1.toString());
+//            TxtvPriceCart1.setText(Data2.toString());
+//        }
+//        else {
+//            TxtvFoodNameCart1.setVisibility(View.INVISIBLE);
+//            TxtvPriceCart1.setVisibility(View.INVISIBLE);
+//            ImgFood1.setVisibility(View.INVISIBLE);
+//            BtnReduceItemCart.setVisibility(View.INVISIBLE);
+//            BtnAddItemCart.setVisibility(View.INVISIBLE);
+//            EdtxItem.setVisibility(View.INVISIBLE);
+//        }
 
 
         return view;
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -154,6 +166,16 @@ public class CartFragment extends Fragment {
         }
     }
 
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof CartFragment.OnFragmentInteractionListener) {
+//            mListener = (CartFragment.OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
 
 
     @Override

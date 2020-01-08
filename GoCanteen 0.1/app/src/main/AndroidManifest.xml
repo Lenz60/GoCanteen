@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".blank"></activity>
+        <activity android:name=".HomeToCart"></activity>
         <activity android:name=".model.TopUpVerif" />
         <activity android:name=".model.AddSaldoActivity" />
         <activity android:name=".PPActivity" />
