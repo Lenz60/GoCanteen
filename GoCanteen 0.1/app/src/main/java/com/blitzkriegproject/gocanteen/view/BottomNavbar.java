@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -24,13 +25,18 @@ import com.blitzkriegproject.gocanteen.model.Menu.Bakso;
 import com.blitzkriegproject.gocanteen.model.Login;
 import com.blitzkriegproject.gocanteen.model.Menu.Magelangan;
 import com.blitzkriegproject.gocanteen.model.Menu.Mieayam;
+import com.blitzkriegproject.gocanteen.model.NotificationOrder.OrderNotif;
 import com.blitzkriegproject.gocanteen.model.SharedPrefmanager;
 import com.blitzkriegproject.gocanteen.model.URLs;
+import com.blitzkriegproject.gocanteen.model.User;
 import com.blitzkriegproject.gocanteen.model.VolleySingleton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class BottomNavbar extends AppCompatActivity {
 
@@ -292,6 +298,74 @@ public class BottomNavbar extends AppCompatActivity {
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
+    public void GetNotification() {
+        User user = SharedPrefmanager.getInstance(this).getUser();
+        final Integer id = user.getId();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_NOTIF,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+                        try {
+                            //convert response to json object
+                            JSONObject obj = new JSONObject(response);
+
+                            //if no error in response
+                            if (!obj.getBoolean("error")) {
+                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+
+                                //getting the user from the response
+                                JSONObject userJsonM = obj.getJSONObject("orderNotification");
+
+//                                "id":13,"name_user":"Rafly
+//                                Andrian","name_product":"Paket Mieayam & Esteh","place":"Basement
+//                                5","seat_number":5,"quantity":2,"total_price":24000,"status":"Menunggu"}
+
+                                OrderNotif notif = new OrderNotif(
+                                        userJsonM.getInt("id"),
+                                        userJsonM.getInt("quantity"),
+                                        userJsonM.getInt("total_price"),
+                                        userJsonM.getString("name_user"),
+                                        userJsonM.getString("name_product"),
+                                        userJsonM.getString("place"),
+                                        userJsonM.getString("seat_number"),
+                                        userJsonM.getString("status")
+                                );
+
+                                //storing the user in shared preferences
+                                SharedPrefmanager.getInstance(getApplicationContext()).storeNotif(notif);
+//                                SharedPrefmanager.getInstance(getApplicationContext()).storeMenuB(bakso);
+//                                SharedPrefmanager.getInstance(getApplicationContext()).storeMenuMG(magelangan);
+
+                                //starting the profile activity
+                            } else {
+                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map <String, String> params = new HashMap<>();
+                params.put("id", id.toString());
+                return params;
+            }
+
+        };
+
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
 
     private  BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -311,9 +385,6 @@ public class BottomNavbar extends AppCompatActivity {
                     fragment = new TokoFragment();
                     break;
 
-                case R.id.navigation_cart :
-                    fragment = new CartFragment();
-                    break;
 
                 case R.id.navigation_profile :
                     fragment = new ProfileFragment();

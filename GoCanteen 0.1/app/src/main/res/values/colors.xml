@@ -7,7 +7,9 @@
     <color name="BG2">#D81B60</color>
     <color name="BGCover">#CE4094FF</color>
     <color name="BGBottomNav">#A147FF</color>
+    <color name="BGMenu">#B9B880FF</color>
     <color name="GreenSaldo">#3B8F00</color>
     <color name="WelcomeHello">#2299F3</color>
     <color name="AddSaldoBar">#2BC92F</color>
+    <color name="BorderNotif">#C9A1FCFF</color>
 </resources>

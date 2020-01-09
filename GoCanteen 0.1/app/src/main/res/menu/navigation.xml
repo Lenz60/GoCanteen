@@ -10,10 +10,6 @@
         android:icon="@drawable/ic_restaurant_white_24dp"
         android:title="@string/title_toko" />
 
-    <item
-        android:id="@+id/navigation_cart"
-        android:icon="@drawable/ic_shopping_cart_white_24dp"
-        android:title="@string/title_cart" />
 
     <item
         android:id="@+id/navigation_notification"

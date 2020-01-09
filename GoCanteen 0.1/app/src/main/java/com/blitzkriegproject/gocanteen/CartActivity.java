@@ -5,17 +5,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.blitzkriegproject.gocanteen.model.SharedPrefmanager;
+import com.blitzkriegproject.gocanteen.model.URLs;
+import com.blitzkriegproject.gocanteen.model.User;
+import com.blitzkriegproject.gocanteen.model.VolleySingleton;
 import com.blitzkriegproject.gocanteen.view.BottomNavbar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -28,10 +44,22 @@ public class CartActivity extends AppCompatActivity {
     Button BtnAddItemCart1, BtnReduceItemCart1;
     Button BtnAddItemCart2, BtnReduceItemCart2;
     Button BtnAddItemCart3, BtnReduceItemCart3;
+    Button BtnOrder;
     EditText EdtxItem1, EdtxItem2, EdtxItem3;
-    private static int edt = 1;
-    private static int add = 1001;
-    private static int minus = 2001;
+
+    //fetched value
+    Integer setIDFood;
+    String FoodName;
+    String Price;
+
+    //spinner value
+    String Tempat;
+    String Kursi1;
+    String Kursi2;
+
+    //Price Total
+    Integer Total;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +86,19 @@ public class CartActivity extends AppCompatActivity {
         BtnReduceItemCart2 = (Button) findViewById(R.id.BtnReduceItemCart2);
         BtnAddItemCart3 = (Button) findViewById(R.id.BtnAddItemCart3);
         BtnReduceItemCart3 = (Button) findViewById(R.id.BtnReduceItemCart3);
+        BtnOrder = (Button) findViewById(R.id.BtnOrder);
         ImgFood1 = (ImageView) findViewById(R.id.ImgFood1);
         ImgFood2 = (ImageView) findViewById(R.id.ImgFood2);
         ImgFood3 = (ImageView) findViewById(R.id.ImgFood3);
 
-        AdapterSpinner();
+        //AdapterSpinner();
+
+
 
         final Intent intent = getIntent();
-        final Integer setIDFood = intent.getIntExtra("setIDMenu",0);
-        final String FoodName = intent.getStringExtra("FoodName");
-        final String Price = intent.getStringExtra("Price");
+        setIDFood = intent.getIntExtra("setIDMenu",0);
+        FoodName = intent.getStringExtra("FoodName");
+        Price = intent.getStringExtra("Price");
 
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setGroupingSeparator('.');
@@ -152,7 +183,7 @@ public class CartActivity extends AppCompatActivity {
 
                 EdtxItem1.setText(new Integer(b).toString());
                 String ValueEdtx = EdtxItem1.getText().toString();
-                Integer Total = Integer.valueOf(Integer.valueOf(ValueEdtx) * Integer.valueOf(Price));
+                Total = Integer.valueOf(Integer.valueOf(ValueEdtx) * Integer.valueOf(Price));
                 TxtvPriceCart1.setText(decimalFormat.format(Total));
 
                 if(Total <= 0 ){
@@ -173,7 +204,7 @@ public class CartActivity extends AppCompatActivity {
 
                 EdtxItem1.setText(new Integer(b).toString());
                 String ValueEdtx = EdtxItem1.getText().toString();
-                Integer Total = Integer.valueOf(Integer.valueOf(ValueEdtx) * Integer.valueOf(Price));
+                Total = Integer.valueOf(Integer.valueOf(ValueEdtx) * Integer.valueOf(Price));
                 TxtvPriceCart1.setText(decimalFormat.format(Total));
 
                 if(Total <= 0 ){
@@ -184,31 +215,118 @@ public class CartActivity extends AppCompatActivity {
 
 
 
+        BtnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Order();
+            }
+        });
 
+
+    }
+
+    private void Order() {
+        Tempat = SpinnerTempat.getSelectedItem().toString();
+        Kursi1 = SpinnerKursi1.getSelectedItem().toString();
+        Kursi2 = SpinnerKursi2.getSelectedItem().toString();
+//        id_product','id_user',
+//        'quantity','place','seat_number','total_price'
+        User user = SharedPrefmanager.getInstance(this).getUser();
+        final Integer id_product = setIDFood;
+        final Integer id_user = user.getId();
+        final String quantity = EdtxItem1.getText().toString();
+        final String place = Tempat;
+        final String seat_number = Kursi1 + Kursi2;
+        final Integer total_price = Total;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_ORDER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            //convert response to json object
+                            JSONObject obj = new JSONObject(response);
+
+                            //if no error in response
+                            if (!obj.getBoolean("error")) {
+                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+
+//                                //getting the user from the response
+//                                JSONObject userJson = obj.getJSONObject("user");
+//
+//                                User user = new User(
+//                                        userJson.getInt("id"),
+//                                        userJson.getString("name"),
+//                                        userJson.getString("email"),
+//                                        userJson.getString("saldo")
+//                                );
+//
+//                                //storing the user in shared preferences
+//                                SharedPrefmanager.getInstance(getApplicationContext()).userLogin(user);
+
+                                //starting the profile activity
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), TopupVeriftoBottomNav.class));
+                            } else {
+                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            //        id_product','id_user',
+//        'quantity','place','seat_number','total_price'
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map <String, String> params = new HashMap<>();
+                params.put("id_product", id_product.toString());
+                params.put("id_user", id_user.toString());
+                params.put("quantity", quantity.toString());
+                params.put("place", place.toString());
+                params.put("seat_number", seat_number.toString());
+                params.put("total_price", total_price.toString());
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
 
     private void AdapterSpinner() {
-        ArrayAdapter<CharSequence> adapterLokasi = ArrayAdapter.createFromResource(this,
-                R.array.lokasi, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapterLokasi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        SpinnerTempat.setAdapter(adapterLokasi);
+//        ArrayAdapter<CharSequence> adapterLokasi = ArrayAdapter.createFromResource(this,
+//                R.array.lokasi, android.R.layout.simple_spinner_item);
+//        // Specify the layout to use when the list of choices appears
+//        adapterLokasi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        // Apply the adapter to the spinner
+//        SpinnerTempat.setAdapter(adapterLokasi);
+//
+//        ArrayAdapter<CharSequence> adapterKursi1 = ArrayAdapter.createFromResource(this,
+//                R.array.nomor_kursi1, android.R.layout.simple_spinner_item);
+//        // Specify the layout to use when the list of choices appears
+//        adapterKursi1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        // Apply the adapter to the spinner
+//        SpinnerKursi1.setAdapter(adapterKursi1);
+//
+//        ArrayAdapter<CharSequence> adapterKursi2 = ArrayAdapter.createFromResource(this,
+//                R.array.nomor_kursi2, android.R.layout.simple_spinner_item);
+//        // Specify the layout to use when the list of choices appears
+//        adapterKursi2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        // Apply the adapter to the spinner
+//        SpinnerKursi2.setAdapter(adapterKursi2);
 
-        ArrayAdapter<CharSequence> adapterKursi1 = ArrayAdapter.createFromResource(this,
-                R.array.nomor_kursi1, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapterKursi1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        SpinnerKursi1.setAdapter(adapterKursi1);
 
-        ArrayAdapter<CharSequence> adapterKursi2 = ArrayAdapter.createFromResource(this,
-                R.array.nomor_kursi2, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapterKursi2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        SpinnerKursi2.setAdapter(adapterKursi2);
+
     }
+
+
 
 }

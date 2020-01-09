@@ -32,7 +32,7 @@ public class ProfileFragment extends Fragment {
     //declarasi
     TextView TxtvName,TxtvSaldo;
     ImageView logoutIcon;
-    Button AddPP,AddSaldo, Button3;
+    Button AddPP,AddSaldo;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -92,7 +92,6 @@ public class ProfileFragment extends Fragment {
         AddSaldo = (Button) view.findViewById(R.id.BtnAddSaldo);
         TxtvName = (TextView) view.findViewById(R.id.TxtvName);
         TxtvSaldo = (TextView) view.findViewById(R.id.TxtvSaldo);
-        Button3 = (Button) view.findViewById(R.id.button3);
 
         //set name value
         final User user = SharedPrefmanager.getInstance(getActivity()).getUser();
@@ -126,12 +125,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        Button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TxtvSaldo.setText(user.getSaldo());
-            }
-        });
+
 
 
 

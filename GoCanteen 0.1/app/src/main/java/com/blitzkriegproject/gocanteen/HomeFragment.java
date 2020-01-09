@@ -146,6 +146,10 @@ public class HomeFragment extends Fragment {
                 BottomnavJava.GetBaksoMenu();
                 BottomnavJava.GetMagelanganMenu();
 
+                if (SwipeReload.isRefreshing()) {
+                    SwipeReload.setRefreshing(false);
+                }
+
             }
         });
         SwipeReload.setRefreshing(false);

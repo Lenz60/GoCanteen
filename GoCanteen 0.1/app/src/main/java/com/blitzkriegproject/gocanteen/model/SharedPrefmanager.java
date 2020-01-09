@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import com.blitzkriegproject.gocanteen.model.Menu.Bakso;
 import com.blitzkriegproject.gocanteen.model.Menu.Magelangan;
 import com.blitzkriegproject.gocanteen.model.Menu.Mieayam;
+import com.blitzkriegproject.gocanteen.model.NotificationOrder.OrderNotif;
 
 public class SharedPrefmanager {
 
@@ -43,6 +44,18 @@ public class SharedPrefmanager {
     private static final String KEY_STOCK3 = "stock3";
     private static final String KEY_TOTAL_SOLD3 = "totalsold3";
 
+    private static final String KEY_NOTIFID = "notifid";
+    private static final String KEY_NOTIFQUANTITY = "notifquantity";
+    private static final String KEY_NOTIFTOTAL_PRICE = "notiftotalprice";
+    private static final String KEY_NOTIFNAME_USER = "notifnameuser";
+    private static final String KEY_NOTIFNAME_PRODUCT = "notifnameproduct";
+    private static final String KEY_NOTIFPLACE = "notifplace";
+    private static final String KEY_NOTIFSEAT_NUMBER = "notifseatnumber";
+    private static final String KEY_NOTIFSTATUS = "notifstatus";
+
+//    Integer id, quantity, total_price;
+//    String name_user, name_product, place, seat_number, status;
+
     private static SharedPrefmanager mInstance;
     private static Context mCtx;
 
@@ -66,6 +79,34 @@ public class SharedPrefmanager {
         editor.putString(KEY_NAME, user.getName());
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_SALDO, user.getSaldo());
+        editor.apply();
+    }
+
+    //store notif
+    public void storeNotif(OrderNotif notif){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+//        private static final String KEY_NOTIFID = "notifid";
+//        private static final String KEY_NOTIFQUANTITY = "notifquantity";
+//        private static final String KEY_NOTIFTOTAL_PRICE = "notiftotalsold3";
+//        private static final String KEY_NOTIFNAME_USER = "notifnameuser";
+//        private static final String KEY_NOTIFNAME_PRODUCT = "notifnameproduct";
+//        private static final String KEY_NOTIFPLACE = "notifplace";
+//        private static final String KEY_NOTIFSEAT_NUMBER = "notifseatnumber";
+//        private static final String KEY_NOTIFSTATUS = "notifstatus";
+//
+////    Integer id, quantity, total_price;
+////    String name_user, name_product, place, seat_number, status;
+
+        editor.putInt(KEY_NOTIFID, notif.getId());
+        editor.putInt(KEY_NOTIFQUANTITY, notif.getQuantity());
+        editor.putInt(KEY_NOTIFTOTAL_PRICE, notif.getTotal_price());
+        editor.putString(KEY_NOTIFNAME_USER, notif.getName_user());
+        editor.putString(KEY_NOTIFNAME_PRODUCT, notif.getName_product());
+        editor.putString(KEY_NOTIFPLACE, notif.getPlace());
+        editor.putString(KEY_NOTIFSEAT_NUMBER, notif.getSeat_number());
+        editor.putString(KEY_NOTIFSTATUS, notif.getStatus());
         editor.apply();
     }
 
@@ -179,6 +220,32 @@ public class SharedPrefmanager {
                 sharedPreferences.getInt(KEY_TOTAL_SOLD3, 1),
                 sharedPreferences.getString(KEY_NAME_MENU3, null),
                 sharedPreferences.getString(KEY_CATEGORY3, null)
+
+
+        );
+    }
+
+    public OrderNotif getNotif(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return  new OrderNotif(
+
+                //          editor.putInt(KEY_NOTIFID, notif.getId());
+                //        editor.putInt(KEY_NOTIFQUANTITY, notif.getQuantity());
+                //        editor.putInt(KEY_NOTIFTOTAL_PRICE, notif.getTotal_price());
+                //        editor.putString(KEY_NOTIFNAME_USER, notif.getName_user());
+                //        editor.putString(KEY_NOTIFNAME_PRODUCT, notif.getName_product());
+                //        editor.putString(KEY_NOTIFPLACE, notif.getPlace());
+                //        editor.putString(KEY_NOTIFSEAT_NUMBER, notif.getSeat_number());
+                //        editor.putString(KEY_NOTIFSTATUS, notif.getStatus());
+
+                sharedPreferences.getInt(KEY_NOTIFID, 1),
+                sharedPreferences.getInt(KEY_NOTIFQUANTITY, 1),
+                sharedPreferences.getInt(KEY_NOTIFTOTAL_PRICE, 1),
+                sharedPreferences.getString(KEY_NOTIFNAME_USER, null),
+                sharedPreferences.getString(KEY_NOTIFNAME_PRODUCT, null),
+                sharedPreferences.getString(KEY_NOTIFPLACE, null),
+                sharedPreferences.getString(KEY_NOTIFSEAT_NUMBER, null),
+                sharedPreferences.getString(KEY_NOTIFSTATUS, null)
 
 
         );
