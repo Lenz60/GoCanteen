@@ -1,0 +1,26 @@
+sepuluhribu {md5}(10character)
+
+
+10 rb 
+8ba6ee30a5
+
+20rb
+c2ac15f919
+
+50rb
+a80ed0fd0d
+
+100rb
+54a24cbf5f
+
+200rb
+debc8d1486
+
+300rb
+66d9228218
+
+400rb
+2386bb23c5
+
+500rb
+7b3f6bf1e5
