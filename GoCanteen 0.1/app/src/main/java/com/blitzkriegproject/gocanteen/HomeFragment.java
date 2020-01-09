@@ -117,9 +117,9 @@ public class HomeFragment extends Fragment {
 
         //set value
         User user = SharedPrefmanager.getInstance(getActivity()).getUser();
-        Mieayam mieayam = SharedPrefmanager.getInstance(getActivity()).getMieayam();
-        Bakso bakso = SharedPrefmanager.getInstance(getActivity()).getBakso();
-        Magelangan magelangan = SharedPrefmanager.getInstance(getActivity()).getMagelangan();
+        final Mieayam mieayam = SharedPrefmanager.getInstance(getActivity()).getMieayam();
+        final Bakso bakso = SharedPrefmanager.getInstance(getActivity()).getBakso();
+        final Magelangan magelangan = SharedPrefmanager.getInstance(getActivity()).getMagelangan();
 
         Menu1 = mieayam.getName();
         Menu2 = bakso.getName();
@@ -137,6 +137,7 @@ public class HomeFragment extends Fragment {
         TxtvPrice2.setText("Rp "+Price2);
         TxtvPrice3.setText("Rp "+Price3);
 
+
         SwipeReload.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -153,16 +154,44 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-//                final Bundle bundle = new Bundle();
-//                bundle.putString("FoodName","asd");
-//                bundle.putString("Price","aaaaaa");
+                Integer setID = mieayam.getId();
 
                 Intent intent = new Intent(getActivity().getBaseContext(),
-                        HomeToCart.class);
+                        CartActivity.class);
+                intent.putExtra("setIDMenu",setID);
                 intent.putExtra("FoodName", Menu1);
                 intent.putExtra("Price", Price1);
                 getActivity().startActivity(intent);
 
+
+            }
+        });
+
+        TxtvMenu2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer setID = bakso.getId();
+
+                Intent intent = new Intent(getActivity().getBaseContext(),
+                        CartActivity.class);
+                intent.putExtra("setIDMenu",setID);
+                intent.putExtra("FoodName", Menu2);
+                intent.putExtra("Price", Price2);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        TxtvMenu3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer setID = magelangan.getId();
+
+                Intent intent = new Intent(getActivity().getBaseContext(),
+                        CartActivity.class);
+                intent.putExtra("setIDMenu",setID);
+                intent.putExtra("FoodName", Menu3);
+                intent.putExtra("Price", Price3);
+                getActivity().startActivity(intent);
 
             }
         });
@@ -176,6 +205,7 @@ public class HomeFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
 
 
 

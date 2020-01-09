@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.blitzkriegproject.gocanteen.R;
+import com.blitzkriegproject.gocanteen.TopupVeriftoBottomNav;
 import com.blitzkriegproject.gocanteen.view.BottomNavbar;
 
 import org.json.JSONException;
@@ -96,7 +97,7 @@ public class AddSaldoActivity extends AppCompatActivity {
 
                                 //starting the profile activity
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), TopUpVerif.class));
+                                startActivity(new Intent(getApplicationContext(), TopupVeriftoBottomNav.class));
                             } else {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }
