@@ -4,7 +4,7 @@ public class URLs {
 //Ganti Base Url berdasarkan IP local anda, dicek di cmd menggunakan "ipconfig -all"
 //Lalu copy ip dari "IPv4 Address. . . . . . . . . . . : 192.168.1.101(Preferred)"
 //Kemudian paste ip tersebut ke BASE_URL
-    private static final String BASE_URL = "http://192.168.1.101/";
+    private static final String BASE_URL = "http://pasarjasa-id.000webhostapp.com/api/";
     private static final String ROOT_URL = BASE_URL + "api.php?apicall=";
 
     public static final String URL_REGISTER = ROOT_URL + "signup";
