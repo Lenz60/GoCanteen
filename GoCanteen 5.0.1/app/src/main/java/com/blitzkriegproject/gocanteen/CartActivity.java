@@ -267,7 +267,7 @@ public class CartActivity extends AppCompatActivity {
 
                                 //starting the profile activity
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), TopupVeriftoBottomNav.class));
+                                startActivity(new Intent(getApplicationContext(), BottomNavbar.class));
                             } else {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }

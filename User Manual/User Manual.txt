@@ -1,0 +1,17 @@
+1. Buka XAMPP as admin lalu hidupkan apache dan mysql
+2. Buatlah database bernama "db_kantinamikom"
+3. Lalu pada mysql phpmyadmin import SQL query yang disediakan
+4. Lalu copy isi dari folder Api ke directory localhost
+5. Cek api dengan masuk ke http://localhost/api.php?apicall=login
+6. Jika output nya adalah "[]" berarti berhasil
+7. Lalu edit IP BASE_URL di Urls.java
+8. lokasi Urls.java (..\GoCanteen 5.0.1\app\src\main\java\com\blitzkriegproject\gocanteen\model)
+9. Open with notepad saja
+10. Edit IP BASE_URL Urls.java untuk menyesuaikan ip local komputer anda yang terdapat di cmd dengan mengetikkan "ipconfig -all"
+11. Lalu copy ipaddress pada Ipv4 ........ ipadress(prefered)
+12. Paste ipadress pada variable BASE_URL yang terdapat di dalam Urls.java
+13. Run program
+
+ps. 
+Untuk dapat melihat perubahan pada saldo, anda harus logout terlebih dahulu lalu login kembali
+

@@ -50,7 +50,8 @@ public class NotificationFragment extends Fragment {
     TextView TxtvNotifNama, TxtvNotifMakanan,
             TxtvNotifQuantity, TxtvNotifQuantity2,
             TxtvNotifTotal, TxtvNotifTotal2,
-            TxtvNotifTempat, TxtvNotifKursi;
+            TxtvNotifTempat, TxtvNotifKursi,
+            TxtvNotifStatus;
     ImageView ImgNotifProses;
     SwipeRefreshLayout NotifSwipeReload;
     BottomNavbar BottomnavJava ;
@@ -119,6 +120,7 @@ public class NotificationFragment extends Fragment {
         TxtvNotifQuantity2 = (TextView) view.findViewById(R.id.TxtvNotifQuantity2);
         TxtvNotifTotal = (TextView) view.findViewById(R.id.TxtvNotifTotal);
         TxtvNotifTotal2 = (TextView) view.findViewById(R.id.TxtvNotifTotal2);
+        TxtvNotifStatus = (TextView) view.findViewById(R.id.TxtvNotifStatus);
         TxtvNotifTempat = (TextView) view.findViewById(R.id.TxtvNotifTempat);
         TxtvNotifKursi = (TextView) view.findViewById(R.id.TxtvNotifKursi);
         NotifSwipeReload = (SwipeRefreshLayout) view.findViewById(R.id.NotifSwipeReload);
@@ -129,13 +131,14 @@ public class NotificationFragment extends Fragment {
 
 
         final OrderNotif notif = SharedPrefmanager.getInstance(getActivity()).getNotif();
+        Status = notif.getStatus();
         Nama = notif.getName_user();
         Makanan = notif.getName_product();
         Tempat = notif.getPlace();
         Kursi = notif.getSeat_number();
         Quantity =  Integer.valueOf(notif.getQuantity());
         Total =  Integer.valueOf(notif.getTotal_price());
-        Status = notif.getStatus();
+
 
 
 
@@ -227,21 +230,30 @@ public class NotificationFragment extends Fragment {
                 TxtvNotifTempat.setText(Tempat);
                 TxtvNotifKursi.setText(Kursi);
                 TxtvNotifTotal2.setText(decimalFormat.format(Total));
+//                TxtvNotifTotal2.setText("Rp "+ Total);
                 TxtvNotifQuantity2.setText(Quantity.toString());
                 TxtvNotifTotal.setText("Total : ");
                 TxtvNotifQuantity.setText("Jumlah : ");
 
 
+                if(Status != null){
+                    if(Status.equalsIgnoreCase("Menunggu")){
+                        ImgNotifProses.setImageResource(R.drawable.menunggu);
+                    }
+                    else if (Status.equalsIgnoreCase("Dibuat")){
+                        ImgNotifProses.setImageResource(R.drawable.dibuat);
+                    }
+                    else if (Status.equalsIgnoreCase("Diantar")){
+                        ImgNotifProses.setImageResource(R.drawable.diantar);
+                    }
+                }
+                else {
 
-                if(Status.equalsIgnoreCase("Menunggu")){
-                    ImgNotifProses.setImageResource(R.drawable.menunggu);
+                    TxtvNotifStatus.setText(Status);
+
                 }
-                else if (Status.equalsIgnoreCase("Dibuat")){
-                    ImgNotifProses.setImageResource(R.drawable.dibuat);
-                }
-                else if (Status.equalsIgnoreCase("Diantar")){
-                    ImgNotifProses.setImageResource(R.drawable.diantar);
-                }
+
+
 
                 if (NotifSwipeReload.isRefreshing()) {
                     NotifSwipeReload.setRefreshing(false);
